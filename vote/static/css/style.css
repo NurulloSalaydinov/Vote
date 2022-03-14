@@ -199,7 +199,6 @@ max-width: 100% !important;
     max-width: 1100px;
     margin-left: auto;
     margin-right: auto;
-    
 }
 .list-wr{
 
@@ -218,6 +217,31 @@ max-width: 100% !important;
     margin-bottom: 20px !important;
     padding-bottom: 4px !important;
 }
+
+.border-list > span {
+    cursor: pointer;
+    transition: 250ms;
+    transform: rotate(-180deg);
+}
+
+.folder {
+    transition:all 250ms;
+
+} 
+.list-wr.none .folder {
+    /* display: none !important; */
+    height: 0;
+    overflow: hidden;
+}
+
+.list-wr.none .border-list{
+    margin-bottom: 0 !important;
+}
+
+.list-wr.none .border-list > span{
+    transform: rotate(0) !important;
+}
+
 
 .border-list p{
     text-align: center !important;
