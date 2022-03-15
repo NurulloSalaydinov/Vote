@@ -390,7 +390,18 @@ cursor: pointer !important;
 }
 .wrapper-list-wr{
     padding: 20px 20px !important;
+    list-style: none !important;
+    counter-reset: listNumbering !important;
 }
+
+.wrapper-list-wr .bgimage span {
+    counter-increment: listNumbering !important;
+}
+
+.wrapper-list-wr .bgimage span::before {
+    content: counter(listNumbering);
+}
+
 .bb-bottom{
     border-bottom: 1px solid black;
     margin-bottom: 10px !important;
