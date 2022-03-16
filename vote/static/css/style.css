@@ -1152,3 +1152,14 @@ color: #41C176 !important;
     }
     
 }
+/* custom css from backend developer */
+.border-radius-20 {
+    border: 1px solid #000 !important;
+    border-radius: 20px !important;
+}
+
+@media (max-width: 442px) {
+    .border-radius-20 {
+        border-radius: 10px !important;
+    }
+}

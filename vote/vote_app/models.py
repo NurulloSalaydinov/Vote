@@ -21,6 +21,7 @@ class Title(models.Model):
 class Category(models.Model):
     title = models.ForeignKey(Title, on_delete=models.CASCADE, related_name='categories')
     category_title = models.CharField('Category Title', max_length=255)
+    all_votes = models.PositiveIntegerField(default=0)
     total_votes = models.ManyToManyField(TelegramUser, blank=True)
     
     def __str__(self):
@@ -31,7 +32,7 @@ class CategoryItem(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='parent_categories')
     brand_name = models.CharField(max_length=255)
     total_votes_count = models.PositiveIntegerField(default=0)
-
+    total_votes_percent = models.PositiveIntegerField(default=0)
     def __str__(self):
         return self.brand_name
 
