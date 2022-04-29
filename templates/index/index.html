@@ -1,0 +1,123 @@
+{% extends 'base/base.html' %}
+{% block content %}
+<!-- first section starts -->
+<section>
+<div class="wrapper">
+  <div class="d-lg-flex d-none d-sm-block text-lg-start text-center align-items-center justify-content-lg-between header-blog">
+    <div class="vote-txt">
+      <h1>2022 - yilning “Eng yaxshi brendlar” ga ovoz bering </h1><br>
+      <a class="vote-button" href="#">Ovoz berish</a>
+    </div>
+    <img class="img-fluid hands-image" src="/static/images/Voting.png" alt="hands-image">
+    </div>
+    <div class="d-block d-sm-none">
+      <div class="vote-txt">
+        <div class="res-big">
+          <h1>2022 - yilning “Eng yaxshi brendlar” iga ovoz bering </h1>
+        </div>
+        <img class="img-fluid hands-image" src="/static/images/Voting.png" alt="hands-image"><br><br>
+        <div class="res-big">
+          <a class="vote-button" href="#">Ovoz berish</a>
+        </div>
+
+      </div>
+    </div>
+    <br>
+    <div class="circle-turn">
+      <a href="#blog">Aylantiring</a>
+      <img class="line" src="/static/images/Line 3.png" alt="lines-image">
+    </div>
+    <br>
+</div>
+</section>
+<!-- end first section -->
+
+<!--start of second section -->
+<div class="marque-wrapper">
+  <div class="marque-qr marque-rot marques-hight">
+    <marquee class="marque-second" behavior="smooth" direction="left"><span>Brendlarga ovoz bering</span>  <span>Brendlarga ovoz bering</span>    <span>Brendlarga ovoz bering</span> <span>Brendlarga ovoz bering</span>  <span>Brendlarga ovoz bering</span>  </marquee>
+    </div>
+</div>
+
+
+<div class="wrapper pt-5" id="blog">
+<div class="text-center text">
+ <h1> 2022 - yilning “Eng yaxshi brendlar” <br> tanlov natijalari</h1>
+</div>
+
+<!-- start list -->
+
+<!-- end list -->
+
+<br>
+<div class="text-center vote-but">
+  <a href="#">Ovoz berish</a>
+</div>
+
+</div>
+<!-- end of the second block -->
+<!-- new section -->
+
+<section class="mt-5">
+  <div class="wrapper">
+    <div class="text-center our-cus" >
+      <h1 style="cursor: pointer;">Bizning hamkorlarimiz</h1>
+    </div>
+
+    <div class="d-flex align-items-center justify-content-center pt-4 companies-support flex-wrap">
+     <img src="/static/images/IN TECH (1).png" alt="intechs-photo">
+     <img src="/static/images/UIC.png" alt="ui's-photo">
+     <img src="/static/images/YOSHLAR TEXNOPARKI.png" alt="yoshlar-texnoparki">
+     <img src="/static/images/RE WORK.png" alt="reworks-photo">
+
+    </div>
+  </div>
+</section>
+{% for i in lists %}
+    <div class="accordion list-wr" ls-color="#F7918D" id="list">
+    <!-- red list at the top // -->
+    <div class="red-border border-list">
+
+    <div class="center-text">
+      <p>{{i.name}}</p>
+    </div>
+    <span><img src="/static/images/coolicon (6).png" alt="down-icon"></span>
+
+    </div>
+    <!-- end of the red one -->
+
+    <!-- wrapper list -->
+    <div class="folder accordion_in">
+    <div class="wrapper-list-wr">
+        {% for z in lis2 %}
+        {% if z.bind == i %}
+            <div class="d-flex align-items-center justify-content-between bb-bottom">
+                <div class="d-flex images-texts align-items-start">
+                 <div class="bgimage">
+                     {% if z.count <= 3 and z.vote > 0 %}
+                     <span class="star">{{z.count}}</span>
+                     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Red_star.svg/1235px-Red_star.svg.png" alt="">
+                     {% else %}
+                     <span>{{z.count}}</span>
+                     {% endif %}
+                 </div>
+                <p class="bukhari">{{z.name}}</p>
+                </div>
+                <div class="d-flex align-items-start">
+                <p class="votes"><span>{{z.vote}}</span> ta ovoz </p>
+                <p class="persent">{{z.percent}}%</p>
+                <a class="vote-pl" href="#">Ovoz berish</a>
+                </div>
+            </div>
+        {% endif %}
+        {% endfor %}
+    </div>
+    </div>
+    <!-- end -->
+  </div>
+
+{% endfor %}
+
+
+<!-- end of the new section -->
+{% endblock %}

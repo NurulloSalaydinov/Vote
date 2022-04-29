@@ -1,0 +1,121 @@
+{% extends 'base/base.html' %}
+{% block content %}
+<div class="loader">
+  <div class="lds-roller">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+</div>
+<div class="container mb-4">
+  <div class="text-center">
+    <div class="cart-title mb-4">
+      <h2>Filterlang</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 col-sm-12 col-md-6 mb-3">
+      <div class="cart-title">
+      <h4>Categoriyasi bo'yicha</h4>
+      </div>
+      <select class="form-select select_category" aria-label="Default select example">
+        <option>-----</option>
+        <option value="all">hammasi</option>
+        {% for category in categories %}
+        <option value="{{category.name}}">{{category.name}}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="col-12 col-sm-12 col-md-6">
+      <div class="cart-title">
+      <h4>Ovoz bergan joyi bo'yicha</h4>
+      </div>
+      <select class="form-select select_places" aria-label="Default select example">
+
+      </select>
+    </div>
+  </div>
+</div>
+<table class="table">
+  <caption>List of users</caption>
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Ismi</th>
+      <th scope="col">Telefon no'meri</th>
+      <th scope="col">Telegram username</th>
+      <th scope="col">Ovoz bergan</th>
+      <th scope="col">Vaqti</th>
+      <th scope="col">Yoshda</th>
+    </tr>
+  </thead>
+  <tbody class="tbody">
+  {% for user in users %}
+    <tr>
+      <th scope="row">{{user.count}}</th>
+      <td>{{user.name}}</td>
+      <td>
+        <a href="tel:+{{user.phonenumber}}" target="_blank">+{{user.phonenumber}}</a>
+      </td>
+      <td>
+        <a href="http://t.me/{{user.username}}" target="_blank">{{user.username}}</a>
+      </td>
+      <td>{{user.voted}} ga</td>
+      <td>{{user.date}} da</td>
+      <td>{{user.age}} yoshda </td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+<script>
+  /* AJAX FILTER */
+let select = document.querySelector(".select_category");
+select.addEventListener("change",function(){
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+    if (xhttp.readyState === 4 && xhttp.status === 200) {
+         let plselect = document.querySelector('.select_places');
+         if(select.value != "-----"){
+            let data = JSON.parse(this.response);
+            let result = JSON.parse(data.ref);
+            plselect.innerHTML = "<option>-----</option>"
+            result.forEach(function(e){
+                   plselect.innerHTML += `<option value="${e.fields.name}">${e.fields.name}</option>`;
+            })
+         }
+         else{
+            plselect.innerHTML = "<option>-----</option>"
+         }
+    }
+    else{
+
+    }
+    }
+    xhttp.open("GET", `?category=${select.value}`, true);
+    xhttp.send();
+})
+
+select_places = document.querySelector(".select_places");
+tbody = document.querySelector(".tbody");
+select_places.addEventListener("change",function(){
+    document.querySelector(".loader").classList = "loader loader_block"
+    tbody.innerHTML = ""
+    var http = new XMLHttpRequest();
+    http.onreadystatechange = function(){
+    if (http.readyState === 4 && http.status === 200) {
+        if(select_places.value != "-----"){
+            tbody.innerHTML = this.responseText;
+            document.querySelector(".loader").classList = "loader"
+        }
+    }
+    }
+    http.open("GET", `${window.location.origin}/getfilterusers?places=${select_places.value}`, true);
+    http.send();
+})
+</script>
+{% endblock %}

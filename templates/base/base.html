@@ -1,0 +1,94 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vote-website</title>
+    <link rel="stylesheet" href="/static/css/style.css"> <!-- link for css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />  <!-- link for font awesome -->
+
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous"><!-- used bootstrap -->
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+</head>
+<body>
+<!-- div for marqueee-->
+<div class="marque-wrapper">
+  <div class="marque-qr">
+    <marquee class="first-marque" behavior="smooth" direction="left"><span>Brendlarga ovoz bering</span>  <span>Brendlarga ovoz bering</span>    <span>Brendlarga ovoz bering</span> <span>Brendlarga ovoz bering</span>  <span>Brendlarga ovoz bering</span>  </marquee>
+    </div>
+</div>
+<!-- //end marqueee-- -->
+
+<!-- start navbar -->
+<div class="wrapper">
+    <nav class="navbar navbar-expand-xl navbar-light no-image">
+        <div class="container-fluid">
+          <a class="navbar-brand h1 mt-3" href="#"><img src="/static/images/logo oficial 1.png" alt="logo"></a>
+          <button class="navbar-toggler border-0 mt-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span  class="navbar-toggler-icon  h3"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto">
+
+              <li class="nav-item">
+                <a  class="nav-link active" href="{% url 'vote:home' %}">Bosh sahifa</a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link " href="{% url 'vote:home' %}#list">Natijalar</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'vote:partners' %}">Hamkorlar</a>
+              </li>
+
+              {% if request.user.is_staff %}
+               <li class="nav-item"><a class="nav-link"  href="{% url 'vote:userspage' %}">Foydalanuvchilar</a></li>
+                {% endif %}
+
+            </ul>
+          </div>
+        </div>
+      </nav>
+</div>
+<!-- end navbar -->
+{% block content %}
+{% endblock %}
+<!-- footer blog start -->
+<footer class="mt-4">
+  <div class="wrapper">
+    <div class="d-lg-flex align-items-start justify-content-between pt-5 footer-flex" >
+     <div>
+       <img class="footer-logo-image" src="/static/images/logo oficial 1.png" alt="footer-logo"><br>
+       <div class="d-flex align-items-center gap-4 footer-icons">
+        <i class="fa-brands fa-facebook-f"></i>
+        <i class="fa-brands fa-instagram"></i>
+        <i class="fa-brands fa-telegram"></i>
+       </div>
+     </div>
+     <ul class="footer-list">
+       <li><a href="{% url 'vote:home' %}">Bosh sahifa</a></li>
+       <li><a href="{% url 'vote:home' %}#list">Natijalar</a></li>
+       <li><a href="{% url 'vote:partners' %}">Hamkorlar</a></li>
+         {% if request.user.is_staff %}
+            <li><a href="{% url 'vote:userspage' %}">Foydalanuvchilar</a></li>
+         {% endif %}
+
+     </ul>
+     <div>
+    <p class="privacy">Privacy and policy</p>
+     </div>
+
+    </div><br>
+    <hr class="line-hr">
+  </div>
+</footer>
+<!-- end of footer -->
+<!-- LOCAL JS -->
+    <script src="/static/js/index.js"></script>
+</body>
+</html>
